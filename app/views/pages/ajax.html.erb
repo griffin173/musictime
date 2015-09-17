@@ -1,0 +1,31 @@
+<% @results.each do |result| %>
+<div class="jumbotron">
+		<h2><%= result.display_name %></h2> 
+
+		<%= result.location.city %> <br>
+		<%= result.venue.display_name %> <br>
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= result.id %>" aria-expanded="true" aria-controls="collapseOne">
+          Artists
+        </a>
+      </h4>
+    </div>
+    <div id="collapse<%= result.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <ul>
+			<% result.performances.each do |performance| %>
+				<li>
+					<%= performance.display_name %>
+				</li>
+
+			<% end %>
+		</ul>
+      </div>
+    </div>
+  </div>
+		
+		
+	</div>
+<% end %>
