@@ -6,6 +6,7 @@
 
 			<%= result.location.city %> <br>
 			<%= result.venue.display_name %> <br>
+			<%= result.start.strftime("%d %b %Y") %> <br>
 		<div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="headingOne">
 		      <h4 class="panel-title">
@@ -16,9 +17,9 @@
 		    </div>
 		    <div id="collapse<%= result.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 		      <div class="panel-body">
-		        <ul>
+		        <ul class="list-group">
 					<% result.performances.each do |performance| %>
-						<li>
+						<li class="list-group-item">
 							<%= performance.display_name %>
 						</li>
 

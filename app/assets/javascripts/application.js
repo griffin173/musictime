@@ -22,37 +22,52 @@ var siberia = new google.maps.LatLng(60, 105);
 var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
 var browserSupportFlag =  new Boolean();
 var map;
+var geocoder;
+var infowindow;
 $( document ).ready(function() {
 initialize();
 
 $( "#updateButton" ).click(function() {
-
-$.ajax({
-  url: "/ajax",
-  data: {
-    lat: map.getCenter().lat(),
-    lng: map.getCenter().lng()
-  }
-})
-  .done(function( data ) {
-    $( ".mainContainer" ).html(data)
+geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      $.ajax({
+        url: "/ajax",
+        data: {
+          lat: map.getCenter().lat(),
+          lng: map.getCenter().lng()
+        }
+      })
+        .done(function( data ) {
+          $( ".mainContainer" ).html(data)
+        });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
   });
 
 
 
-
-
-
-
-
-
-
-  //alert( map.getCenter() );
 });
 
 
-
-
+ map.addListener('dragend', function() {
+    geocoder.geocode({'location': map.getCenter()}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        $( "#addressBox" ).val(results[1].formatted_address);
+        alert(results[1].formatted_address)
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+  });
+ var input = /** @type {!HTMLInputElement} */(
+      document.getElementById('addressBox'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
 
 
 
@@ -69,7 +84,8 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
-
+  geocoder = new google.maps.Geocoder;
+  infowindow = new google.maps.InfoWindow;
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
     browserSupportFlag = true;
@@ -88,10 +104,8 @@ function initialize() {
 
   function handleNoGeolocation(errorFlag) {
     if (errorFlag == true) {
-      alert("Geolocation service failed.");
       initialLocation = newyork;
     } else {
-      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
       initialLocation = siberia;
     }
     map.setCenter(initialLocation);
