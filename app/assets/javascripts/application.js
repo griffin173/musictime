@@ -56,7 +56,6 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[1]) {
         $( "#addressBox" ).val(results[1].formatted_address);
-        alert(results[1].formatted_address)
       } else {
         window.alert('No results found');
       }
@@ -84,6 +83,7 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
+  
   geocoder = new google.maps.Geocoder;
   infowindow = new google.maps.InfoWindow;
   // Try W3C Geolocation (Preferred)

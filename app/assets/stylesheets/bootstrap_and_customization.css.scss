@@ -1,3 +1,4 @@
+$jumbotron-padding: 11px;
 @import 'bootstrap';
 
 
@@ -7,4 +8,14 @@
   height: 480px ;
   margin-left: auto ;
   margin-right: auto ;
+}
+
+
+.resultsContainer {
+    padding-top: 10px;
+    height: 600px;
+    overflow: auto;
+}
+#controls {
+    padding-bottom: 10px;
 }

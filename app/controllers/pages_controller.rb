@@ -22,4 +22,11 @@ class PagesController < ApplicationController
 	  	@results = remote.metro_areas_events(metro).results
 	  	render :layout => false
     end
+  def topsongs
+    artists = RSpotify::Artist.search('Arctic Monkeys')
+
+    arctic_monkeys = artists.first
+    arctic_monkeys.popularity
+    @trackId = arctic_monkeys.top_tracks(:US).first.id
+    end
 end

@@ -18,6 +18,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'will_paginate-bootstrap'
 gem 'songkickr'
 gem 'gmaps4rails'
+gem 'rspotify'
 gem 'underscore-rails'
 gem 'geokit-rails', github: 'geokit/geokit-rails'
 
