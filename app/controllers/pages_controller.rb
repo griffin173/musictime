@@ -22,11 +22,36 @@ class PagesController < ApplicationController
 	  	@results = remote.metro_areas_events(metro).results
 	  	render :layout => false
     end
-  def topsongs
+  def songlist
+    remote = Songkickr::Remote.new '01Q2xyzpKWuaMeI6'
+    showId = params[:songKickID]
+    show = remote.event(showId)
+    bands = Array.new
+    @spotifySongIds = Array.new
+    show.performances.each do |performance|
+      bands.push(performance.artist.display_name)
+    end
+
+
+    bands.each do |band|
+      artists = RSpotify::Artist.search(band)
+      artist = artists.first
+      topTracks = artist.top_tracks(:US).first(3)
+      topTracks.each do |spotifyTrack|
+        @spotifySongIds.push(spotifyTrack.id)
+      end
+    end
+    @spotifySongIds = @spotifySongIds.join(',')
+    render :layout => false
+
+    end
+
+
+  def topssongs
     artists = RSpotify::Artist.search('Arctic Monkeys')
 
     arctic_monkeys = artists.first
     arctic_monkeys.popularity
     @trackId = arctic_monkeys.top_tracks(:US).first.id
-    end
+  end
 end

@@ -39,7 +39,7 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
         }
       })
         .done(function( data ) {
-          $( ".mainContainer" ).html(data)
+          $( ".resultsContainer" ).html(data)
         });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -49,6 +49,21 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
 
 
 });
+
+$( ".spotify-list" ).click(function() {
+  event.stopPropagation()
+      $.ajax({
+        url: "/songlist",
+        data: {
+          songKickID: $(this).attr('data-songkick-id')
+        }
+      })
+        .done(function( data ) {
+          $( "#spotify-widget" ).html(data)
+        });
+   
+  });
+
 
 
  map.addListener('dragend', function() {
@@ -83,7 +98,7 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
-  
+
   geocoder = new google.maps.Geocoder;
   infowindow = new google.maps.InfoWindow;
   // Try W3C Geolocation (Preferred)

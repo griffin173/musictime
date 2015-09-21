@@ -13,6 +13,14 @@
 
 
 <div class="mainContainer">
+    <div class="row">
+        <div class="col-md-3" id="" >
+        </div>
+        <div class="col-md-7 resultsContainer panel panel-default">
+            <%= render partial: 'results', locals: {results: @test.results} %>
+        </div>
 
-	<%= render partial: 'results', locals: {results: @test.results} %>
+        <div class="col-md-2" id="spotify-widget" >
+        </div>
+    </div>
 </div>

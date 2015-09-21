@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'ajax' => 'pages#ajax'
   get 'topsongs' => 'pages#topsongs'
+  get 'songlist' => 'pages#songlist'
   get '/auth/spotify/callback', to: 'users#spotify'
 
   # The priority is based upon order of creation: first created -> highest priority.
