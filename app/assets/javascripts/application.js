@@ -49,7 +49,23 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
 
 
 });
-
+$('.resultsContainer').on('scroll', function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+          $.ajax({
+            url: "/loadmore",
+            data: {
+              metroId: $('#metro-id').attr('data-metro'),
+              page: $('#page').attr('data-page-number')
+            }
+          })
+            .done(function( data ) {
+              var pageNumber = $('#page').attr('data-page-number')
+              pageNumber++
+              $('#page').attr('data-page-number', pageNumber)
+              $( ".resultsContainer" ).append(data)
+            });
+        }
+    });
 $( ".spotify-list" ).click(function() {
   event.stopPropagation()
       $.ajax({
