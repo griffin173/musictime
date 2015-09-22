@@ -17,6 +17,13 @@ $btn-default-bg: #95a5a6;
     height: 600px;
     overflow: auto;
 }
+.seperator {
+  text-align: center;
+  border-top: 5px solid black;
+  border-bottom: 0px solid black;
+  font-size: 30px;
+  padding-bottom: 10px;
+}
 
 #controls {
     padding-bottom: 10px;

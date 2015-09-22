@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'home' => 'pages/home'
 
   get 'ajax' => 'pages#ajax'
+  get 'loadmore' => 'pages#loadmore'
   get 'topsongs' => 'pages#topsongs'
   get 'songlist' => 'pages#songlist'
   get '/auth/spotify/callback', to: 'users#spotify'
