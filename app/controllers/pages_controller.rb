@@ -42,6 +42,9 @@ class PagesController < ApplicationController
 
     bands.each do |band|
       artists = RSpotify::Artist.search(band)
+      if artists.blank? then
+      	next
+      end
       artist = artists.first
       topTracks = artist.top_tracks(:US).first(3)
       topTracks.each do |spotifyTrack|

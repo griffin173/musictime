@@ -40,6 +40,7 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
       })
         .done(function( data ) {
           $( ".resultsContainer" ).html(data)
+          rebindButtons();
         });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -106,6 +107,21 @@ $( ".spotify-list" ).click(function() {
 
 });
 
+function rebindButtons() {
+  	$( ".spotify-list" ).click(function() {
+	  event.stopPropagation()
+	      $.ajax({
+	        url: "/songlist",
+	        data: {
+	          songKickID: $(this).attr('data-songkick-id')
+	        }
+	      })
+	        .done(function( data ) {
+	          $( "#spotify-widget" ).html(data)
+	        });
+	   
+	  });
+}
 
 
 function initialize() {
