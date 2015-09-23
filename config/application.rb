@@ -3,7 +3,6 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'rspotify'
 RSpotify::authenticate("48daea54f34846d9a1ebd1cfdcdb4d6f", "bbff12099330448f8e004fa78d38eb56")
-OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
