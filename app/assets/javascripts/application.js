@@ -122,7 +122,7 @@ function bindButtons() {
           }
         })
           .done(function( data ) {
-            $( "#spotify-widget" ).html(data)
+            $( "#youtube-widget" ).html(data)
           });
      
     });
