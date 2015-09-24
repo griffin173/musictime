@@ -1,0 +1,54 @@
+<div class="jumbotron gigResult container-fluid">
+            <% headliners=[];
+               supportingActs=[];
+               result.performances.each do |artist|
+                 if (artist.billing=='headline') then
+                  headliners.push(artist.display_name)
+                 else
+                  supportingActs.push(artist.display_name)
+                 end
+               end
+            %>
+            <div class="row">
+              <div class="col-md-10" id="youtube-widget" >
+
+                <div class="headliners"><%= headliners.to_sentence %></div> 
+                <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
+                <%= result.venue.display_name() +', '+result.location.city %> <br>
+                <%= result.start.strftime("%d %b %Y") %> <br>
+              </div>
+              <div class="col-md-2" id="youtube-widget" >
+              <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list pull-right">
+                <img height="55" width="155" src="https://developer.spotify.com/wp-content/uploads/2014/06/design-resources-play-on-spotify.png">
+              </a>
+              </div>
+            </div>
+            
+            
+        <div class="panel panel-default">
+            <div class="panel-heading show-artists" role="tab" id="headingOne" data-toggle="collapse" href="#collapse<%= result.id %>" aria-expanded="true" aria-controls="collapseOne">
+              <h4 class="panel-title">
+                
+                  Show All Artists
+
+              
+              </h4>
+
+            </div>
+            <div id="collapse<%= result.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <ul class="list-group">
+                    <% result.performances.each do |performance| %>
+                        <li class="list-group-item">
+                            <%= performance.display_name %>
+                            <button type="button" data-songkick-band-id="<%= performance.artist.id %>" class="btn btn-default youtube-search pull-right">Youtube!</button>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+                
+            </div>

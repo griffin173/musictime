@@ -6,41 +6,7 @@
 				</div>
 		<% startDay = result.start.day
 		end %>
-		<div class="jumbotron gigResult">
-			<h2><%= result.display_name %></h2> 
-
-			<%= result.location.city %> <br>
-			<%= result.venue.display_name %> <br>
-			<%= result.start.strftime("%d %b %Y") %> <br>
-		<div class="panel panel-default">
-		    <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" href="#collapse<%= result.id %>" aria-expanded="true" aria-controls="collapseOne">
-		      <h4 class="panel-title">
-		        <a role="button" data-parent="#accordion" >
-		          Artists
-		        </a>
-
-		      <button type="button" data-songkick-id="<%= result.id %>" class="btn btn-default spotify-list pull-right">Spotify!</button>
-		      <div class="clearfix"></div>
-		      </h4>
-
-		    </div>
-		    <div id="collapse<%= result.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-		      <div class="panel-body">
-		        <ul class="list-group">
-					<% result.performances.each do |performance| %>
-						<li class="list-group-item">
-							<%= performance.display_name %>
-							<button type="button" data-songkick-band-id="<%= performance.artist.id %>" class="btn btn-default youtube-search pull-right">Youtube!</button>
-		      				<div class="clearfix"></div>
-						</li>
-
-					<% end %>
-				</ul>
-		      </div>
-		    </div>
-		  </div>
-				
-			</div>
+		<%= render partial: 'show', locals: {result: result} %>
 
 		<% end %>
 		<% if defined? @metro then %>
