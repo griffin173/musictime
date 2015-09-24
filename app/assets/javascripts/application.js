@@ -40,7 +40,7 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
       })
         .done(function( data ) {
           $( ".resultsContainer" ).html(data)
-          rebindButtons();
+          bindButtons();
         });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -64,11 +64,13 @@ $('.resultsContainer').on('scroll', function() {
               pageNumber++
               $('#page').attr('data-page-number', pageNumber)
               $( ".resultsContainer" ).append(data)
+
+              bindButtons()
             });
         }
     });
 
-rebindButtons()
+bindButtons()
 
 
  map.addListener('dragend', function() {
@@ -95,7 +97,9 @@ rebindButtons()
 
 });
 
-function rebindButtons() {
+function bindButtons() {
+  $( ".spotify-list" ).off( "click", "**" );
+  $( ".youtube-search" ).off( "click", "**" );
   	$( ".spotify-list" ).click(function() {
 	  event.stopPropagation()
 	      $.ajax({
