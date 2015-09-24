@@ -101,7 +101,8 @@ function bindButtons() {
   $( ".spotify-list" ).off( "click", "**" );
   $( ".youtube-search" ).off( "click", "**" );
   	$( ".spotify-list" ).click(function() {
-	  event.stopPropagation()
+    event.stopPropagation()
+	  event.preventDefault()
 	      $.ajax({
 	        url: "/songlist",
 	        data: {
