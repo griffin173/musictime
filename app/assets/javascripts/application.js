@@ -67,20 +67,8 @@ $('.resultsContainer').on('scroll', function() {
             });
         }
     });
-$( ".spotify-list" ).click(function() {
-  event.stopPropagation()
-      $.ajax({
-        url: "/songlist",
-        data: {
-          songKickID: $(this).attr('data-songkick-id')
-        }
-      })
-        .done(function( data ) {
-          $( "#spotify-widget" ).html(data)
-        });
-   
-  });
 
+rebindButtons()
 
 
  map.addListener('dragend', function() {
@@ -113,7 +101,7 @@ function rebindButtons() {
 	      $.ajax({
 	        url: "/songlist",
 	        data: {
-	          songKickID: $(this).attr('data-songkick-id')
+	          songkickID: $(this).attr('data-songkick-id')
 	        }
 	      })
 	        .done(function( data ) {
@@ -121,6 +109,19 @@ function rebindButtons() {
 	        });
 	   
 	  });
+    $( ".youtube-search" ).click(function() {
+    event.stopPropagation()
+        $.ajax({
+          url: "/youtubesearch",
+          data: {
+            songkickBandID: $(this).attr('data-songkick-band-id')
+          }
+        })
+          .done(function( data ) {
+            $( "#spotify-widget" ).html(data)
+          });
+     
+    });
 }
 
 

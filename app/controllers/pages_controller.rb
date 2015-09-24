@@ -31,7 +31,7 @@ class PagesController < ApplicationController
     end
   def songlist
     remote = Songkickr::Remote.new '01Q2xyzpKWuaMeI6'
-    showId = params[:songKickID]
+    showId = params[:songkickID]
     show = remote.event(showId)
     bands = Array.new
     @spotifySongIds = Array.new
@@ -55,6 +55,16 @@ class PagesController < ApplicationController
     render :layout => false
 
     end
+  def youtubesearch
+    remote = Songkickr::Remote.new '01Q2xyzpKWuaMeI6'
+    showId = params[:songkickBandID]
+    band = remote.artist(showId)
+    @query= URI.encode(band.display_name)
+    render :layout => false
+
+
+
+     end
 
 
   def topssongs

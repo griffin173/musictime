@@ -30,6 +30,8 @@
 					<% result.performances.each do |performance| %>
 						<li class="list-group-item">
 							<%= performance.display_name %>
+							<button type="button" data-songkick-band-id="<%= performance.artist.id %>" class="btn btn-default youtube-search pull-right">Youtube!</button>
+		      				<div class="clearfix"></div>
 						</li>
 
 					<% end %>

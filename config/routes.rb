@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'loadmore' => 'pages#loadmore'
   get 'topsongs' => 'pages#topsongs'
   get 'songlist' => 'pages#songlist'
+  get 'youtubesearch' => 'pages#youtubesearch'
   get '/auth/spotify/callback', to: 'users#spotify'
 
   # The priority is based upon order of creation: first created -> highest priority.
