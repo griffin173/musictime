@@ -10,14 +10,14 @@
                end
             %>
             <div class="row">
-              <div class="col-md-10" id="youtube-widget" >
+              <div class="col-md-10" >
 
                 <div class="headliners"><%= headliners.to_sentence %></div> 
                 <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
                 <%= result.venue.display_name() +', '+result.location.city %> <br>
                 <%= result.start.strftime("%d %b %Y") %> <br>
               </div>
-              <div class="col-md-2" id="youtube-widget" >
+              <div class="col-md-2" >
               <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list pull-right">
                 <i class="fa fa-spotify fa-3x"></i>
               </a>

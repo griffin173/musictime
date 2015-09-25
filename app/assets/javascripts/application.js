@@ -110,12 +110,13 @@ function bindButtons() {
 	        }
 	      })
 	        .done(function( data ) {
-	          $( "#spotify-widget" ).html(data)
+	          $( "#youtube-widget" ).html(data)
 	        });
 	   
 	  });
     $( ".youtube-search" ).click(function() {
     event.stopPropagation()
+    event.preventDefault()
         $.ajax({
           url: "/youtubesearch",
           data: {
