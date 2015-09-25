@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-2" id="youtube-widget" >
               <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list pull-right">
-                <img height="55" width="155" src="https://developer.spotify.com/wp-content/uploads/2014/06/design-resources-play-on-spotify.png">
+                <i class="fa fa-spotify fa-3x"></i>
               </a>
               </div>
             </div>
@@ -41,8 +41,10 @@
                     <% result.performances.each do |performance| %>
                         <li class="list-group-item">
                             <%= performance.display_name %>
-                            <button type="button" data-songkick-band-id="<%= performance.artist.id %>" class="btn btn-default youtube-search pull-right">Youtube!</button>
-                            <div class="clearfix"></div>
+                            <a href='#' data-songkick-band-id="<%= performance.artist.id %>" class="youtube-search pull-right">
+                              <i class="fa fa-youtube fa-2x"></i>
+                            </a>
+                            
                         </li>
 
                     <% end %>

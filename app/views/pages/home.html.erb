@@ -1,22 +1,22 @@
 
-
-<div class="mapContainer">
-  <div id="map" style='width: 800px; height: 400px;'></div> <br>
-  <div class="input-group">
-      <input type="text" class="form-control" id="addressBox" placeholder="Enter your address...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" id="updateButton" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
+<div data-spy="affix" data-offset-top="60" >
+  <div class="mapContainer">
+    <div id="map" style='width: 800px; height: 400px;'></div> <br>
+    <div class="input-group">
+        <input type="text" class="form-control" id="addressBox" placeholder="Enter your address...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" id="updateButton" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+  </div>
 </div>
-
 
 
 <div class="mainContainer">
     <div class="row">
         <div class="col-md-3" id="youtube-widget" >
         </div>
-        <div class="col-md-7 resultsContainer panel panel-default">
+        <div class="col-md-7 resultsContainer">
             <%= render partial: 'results', locals: {results: @test.results} %>
         </div>
 
