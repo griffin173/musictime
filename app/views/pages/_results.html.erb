@@ -1,4 +1,4 @@
-	  	<% if (results.length > 0) then startDay = results.first.start.day end %>
+	  	<% startDay = 0 %>
 		<% results.each do |result| %>
 		<% if (startDay != result.start.day) then %>
 			<div class="seperator">
