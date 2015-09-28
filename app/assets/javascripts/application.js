@@ -27,8 +27,8 @@ var infowindow;
 $( document ).ready(function() {
 initialize();
 
-$( "#updateButton" ).click(function() {
-geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status) {
+$( "#update-button" ).click(function() {
+geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
       $.ajax({
@@ -50,7 +50,7 @@ geocoder.geocode({'address': $( "#addressBox" ).val()}, function(results, status
 
 
 });
-$('.resultsContainer').on('scroll', function() {
+$('.results-container').on('scroll', function() {
         if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
           $.ajax({
             url: "/loadmore",
@@ -77,7 +77,7 @@ bindButtons()
     geocoder.geocode({'location': map.getCenter()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[1]) {
-        $( "#addressBox" ).val(results[1].formatted_address);
+        $( "#address-box" ).val(results[1].formatted_address);
       } else {
         window.alert('No results found');
       }
@@ -87,7 +87,7 @@ bindButtons()
   });
   });
  var input = /** @type {!HTMLInputElement} */(
-      document.getElementById('addressBox'));
+      document.getElementById('address-box'));
   var autocomplete = new google.maps.places.Autocomplete(input);
 
 
@@ -133,7 +133,7 @@ function bindButtons() {
 
 function initialize() {
   var myOptions = {
-    zoom: 6,
+    zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);

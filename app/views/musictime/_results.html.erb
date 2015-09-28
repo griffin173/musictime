@@ -1,0 +1,15 @@
+	  	<% startDay = 0 %>
+		<% results.each do |result| %>
+		<% if (startDay != result.start.day) then %>
+			<div class="seperator">
+				<%= result.start.strftime("%d %b %Y") %>
+				</div>
+		<% startDay = result.start.day
+		end %>
+		<%= render partial: 'show', locals: {result: result} %>
+
+		<% end %>
+		<% if defined? @metro then %>
+			<div id="metro-id" data-metro="<%= @metro %>"></div>
+			<div id="page" data-page-number="2"></div>
+		<% end %>

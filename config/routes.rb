@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  root 'pages#home'
-  get 'home' => 'pages/home'
+  root 'musictime#home'
+  get 'home' => 'musictime/home'
 
-  get 'ajax' => 'pages#ajax'
-  get 'loadmore' => 'pages#loadmore'
-  get 'topsongs' => 'pages#topsongs'
-  get 'songlist' => 'pages#songlist'
-  get 'youtubesearch' => 'pages#youtubesearch'
+  get 'ajax' => 'musictime#ajax'
+  get 'loadmore' => 'musictime#load_more'
+  get 'songlist' => 'musictime#songlist'
+  get 'youtubesearch' => 'musictime#youtube_search'
   get '/auth/spotify/callback', to: 'users#spotify'
 
   # The priority is based upon order of creation: first created -> highest priority.
