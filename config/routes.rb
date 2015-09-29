@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'musictime#home'
   get 'home' => 'musictime/home'
 
-  get 'ajax' => 'musictime#ajax'
+  get 'ajax' => 'musictime#get_results'
   get 'loadmore' => 'musictime#load_more'
   get 'songlist' => 'musictime#songlist'
   get 'youtubesearch' => 'musictime#youtube_search'

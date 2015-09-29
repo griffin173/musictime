@@ -39,7 +39,7 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
         }
       })
         .done(function( data ) {
-          $( ".resultsContainer" ).html(data)
+          $( ".results-container" ).html(data)
           bindButtons();
         });
     } else {
@@ -50,21 +50,22 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
 
 
 });
-$('.results-container').on('scroll', function() {
-        if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+$(window).on('scroll', function() {
+        if($(window).scrollTop() == $(document).height() - $(window).height()) {
           $.ajax({
             url: "/loadmore",
             data: {
-              metroId: $('#metro-id').attr('data-metro'),
-              page: $('#page').attr('data-page-number')
+              metro_id: $('#metro-id').attr('data-metro'),
+              page: $('#page').attr('data-page-number'),
+              start_day: $('#last-day').attr('data-last-date')
             }
           })
             .done(function( data ) {
               var pageNumber = $('#page').attr('data-page-number')
               pageNumber++
               $('#page').attr('data-page-number', pageNumber)
-              $( ".resultsContainer" ).append(data)
-
+              $( ".results-container" ).append(data)
+              //$('#last-day').attr('data-last-date', $( ".seperator" ).last().text())
               bindButtons()
             });
         }
@@ -106,7 +107,7 @@ function bindButtons() {
 	      $.ajax({
 	        url: "/songlist",
 	        data: {
-	          songkickID: $(this).attr('data-songkick-id')
+	          songkick_show_id: $(this).attr('data-songkick-id')
 	        }
 	      })
 	        .done(function( data ) {
@@ -120,7 +121,7 @@ function bindButtons() {
         $.ajax({
           url: "/youtubesearch",
           data: {
-            songkickBandID: $(this).attr('data-songkick-band-id')
+            songkick_band_id: $(this).attr('data-songkick-band-id')
           }
         })
           .done(function( data ) {
