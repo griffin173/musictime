@@ -1,5 +1,4 @@
 	  	
-				<%=  @start_day%>
 		<% results.each do |result| %>
 		<% if (@start_day != result.start.day) then %>
 			<div class="date <%='seperator' if (@start_day!=0) %>">
