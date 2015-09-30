@@ -33,7 +33,7 @@ class MusictimeController < ApplicationController
   def load_more
     metro = params[:metro_id]
     page = params[:page]
-    @start_day = params[:start_day]
+    @start_day = params[:start_day].to_date.day
     @results = @api_manager.get_more_results_by_metro(metro, page)
     render 'musictime/get_results', :layout => false
   end

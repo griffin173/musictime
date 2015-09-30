@@ -57,7 +57,7 @@ $(window).on('scroll', function() {
             data: {
               metro_id: $('#metro-id').attr('data-metro'),
               page: $('#page').attr('data-page-number'),
-              start_day: $('#last-day').attr('data-last-date')
+              start_day: $(".seperator" ).last().text()
             }
           })
             .done(function( data ) {
@@ -65,7 +65,6 @@ $(window).on('scroll', function() {
               pageNumber++
               $('#page').attr('data-page-number', pageNumber)
               $( ".results-container" ).append(data)
-              //$('#last-day').attr('data-last-date', $( ".seperator" ).last().text())
               bindButtons()
             });
         }
