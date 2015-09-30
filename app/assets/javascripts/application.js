@@ -52,6 +52,7 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
 });
 $(window).on('scroll', function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
+          $( ".results-container"  ).fadeTo( "slow" , 0.3)
           $.ajax({
             url: "/loadmore",
             data: {
@@ -66,6 +67,7 @@ $(window).on('scroll', function() {
               $('#page').attr('data-page-number', pageNumber)
               $( ".results-container" ).append(data)
               bindButtons()
+              $( ".results-container"  ).fadeTo( "slow" , 1)
             });
         }
     });
