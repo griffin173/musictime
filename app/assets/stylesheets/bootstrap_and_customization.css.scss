@@ -4,6 +4,9 @@ $btn-default-bg: #95a5a6;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+body {
+    padding-top: 50px;
+}
 
 .outermap {
   width: 100%;
@@ -11,8 +14,15 @@ $btn-default-bg: #95a5a6;
   
 }
 .map-container {
-  width: 100% ;
-  height: 480px ;
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    height: 100%;
+    width: 58%;
+}
+.google-map {
+    width: 100%;
+    height: 100%;
 }
 .mapaffix {
 

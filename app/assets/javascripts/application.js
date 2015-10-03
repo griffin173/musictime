@@ -50,6 +50,7 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
 
 
 });
+/*
 $(window).on('scroll', function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
           $( ".results-container"  ).fadeTo( "slow" , 0.3)
@@ -71,7 +72,7 @@ $(window).on('scroll', function() {
             });
         }
     });
-
+*/
 bindButtons()
 
 
@@ -92,12 +93,16 @@ bindButtons()
       document.getElementById('address-box'));
   var autocomplete = new google.maps.places.Autocomplete(input);
 
-
-
-
-
+window.addEventListener('resize', fitMapHeight);
+fitMapHeight();
 
 });
+
+function fitMapHeight() {
+    var navbarHeight = $('nav.navbar-default').first().height();
+    $('#map-container').css('height', window.innerHeight - navbarHeight);
+}
+
 
 function bindButtons() {
   $( ".spotify-list" ).off( "click", "**" );
