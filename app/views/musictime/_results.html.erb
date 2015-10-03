@@ -1,15 +1,23 @@
-	  	
-		<% results.each do |result| %>
-		<% if (@start_day != result.start.day) then %>
-			<div class="date <%='seperator' if (@start_day!=0) %>">
-				<%= result.start.strftime("%d %b %Y") %>
-				</div>
-		<% @start_day = result.start.day
-		end %>
-		<%= render partial: 'show', locals: {result: result} %>
-
-		<% end %>
-		<% if defined? @metro then %>
-			<div id="metro-id" data-metro="<%= @metro %>"></div>
-			<div id="page" data-page-number="2"></div>
-		<% end %>
+<ul class="list-group results-container">	
+  <li id="youtube-widget" class="list-group-item">
+    <p> click on the <i class="fa fa-spotify fa-2x"></i> to load a spotify playlist with the top 3 songs of each band</p>
+    <p> click the <i class="fa fa-youtube fa-2x"></i> to load in youtube videos for that band </p>
+  </li>
+  <% results.each do |result| %>
+  <li class="list-group-item">
+    <% if (@start_day != result.start.day) then %>
+	<div class="date <%='seperator' if (@start_day!=0) %>">
+      <%= result.start.strftime("%d %b %Y") %>
+	</div>
+	<% @start_day = result.start.day
+	end %>
+	<%= render partial: 'show', locals: {result: result} %>
+  </li>
+  <% end %>
+  <% if defined? @metro then %>
+  <li class="list-group-item">
+    <div id="metro-id" data-metro="<%= @metro %>"></div>
+    <div id="page" data-page-number="2"></div>
+  </li>
+  <% end %>
+</ul>
