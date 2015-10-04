@@ -1,7 +1,19 @@
+<div class="player">
+    <button type="button" class="btn btn-default btn-close" onClick="$(this).parent('.player').removeClass('visible')">&times;</button>
+    <div id="youtube-widget">
+
+    </div>
+</div>
 <ul class="list-group results-container">	
-  <li id="youtube-widget" class="list-group-item">
-    <p> click on the <i class="fa fa-spotify fa-2x"></i> to load a spotify playlist with the top 3 songs of each band</p>
-    <p> click the <i class="fa fa-youtube fa-2x"></i> to load in youtube videos for that band </p>
+  <li class="list-group-item">
+    <ul class="legend list-unstyled">
+      <li>
+        <i class="fa fa-spotify fa-2x"></i> &mdash; loads a spotify playlist with the top 3 songs of each band
+      </li>
+      <li>
+        <i class="fa fa-youtube fa-2x"></i> &mdash; loads youtube videos for that band
+      </li>
+    </ul>
   </li>
   <% results.each do |result| %>
   <li class="list-group-item">
