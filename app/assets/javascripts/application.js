@@ -93,14 +93,16 @@ bindButtons()
       document.getElementById('address-box'));
   var autocomplete = new google.maps.places.Autocomplete(input);
 
-window.addEventListener('resize', fitMapHeight);
-fitMapHeight();
+window.addEventListener('resize', positionElements);
+positionElements();
 
 });
 
-function fitMapHeight() {
-    var navbarHeight = $('nav.navbar-default').first().height();
-    $('#map-container').css('height', window.innerHeight - navbarHeight);
+function positionElements() {
+    $('#map-container').css('height', window.innerHeight);
+    // center the player inside the map
+    $('.player').first().css('top', (window.innerHeight - 445)/2);
+    $('.player').first().css('left', ($('#map-container').width() - 340)/2);
 }
 
 
@@ -117,7 +119,9 @@ function bindButtons() {
 	        }
 	      })
 	        .done(function( data ) {
-	          $( "#youtube-widget" ).html(data)
+              var widget = $('#youtube-widget');
+              widget.html(data);
+              widget.parent('.player').addClass('visible');
 	        });
 	   
 	  });

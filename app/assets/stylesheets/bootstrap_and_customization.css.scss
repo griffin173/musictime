@@ -4,8 +4,31 @@ $btn-default-bg: #95a5a6;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-body {
-    padding-top: 50px;
+
+.player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 1000;
+    padding: 40px 20px 20px 20px;
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.0s linear;
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    .btn-close {
+    	position: absolute;
+    	right: 7px;
+    	top: -8px;
+    	background: transparent;
+    	border: 0;
+    	color: #fff;
+    	font-size: 30px;
+    }
 }
 
 .outermap {
@@ -15,8 +38,8 @@ body {
 }
 .map-container {
     position: fixed;
-    top: 50px;
-    left: 0px;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 58%;
 }
@@ -30,6 +53,19 @@ body {
     background-color: white;
     opacity: 1;
   top: 0;
+}
+
+.legend {
+    margin-bottom: 10px;
+    li {
+        i {
+            &.fa {
+                display: inline-block;
+                position: relative;
+                top: 6px;
+            }
+        }
+    }
 }
 
 
