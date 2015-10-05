@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-12 col-md-7">
+  <div class="col-sm-7 col-md-7">
     <div id="map-container" class="map-container">
       <div id="map" class="google-map"></div> 
         <!--
@@ -12,7 +12,25 @@
         -->
     </div>
   </div>
-  <div class="col-sm-12 col-md-5">
+  <div class="col-sm-5 col-md-5">
+    <div class="player">
+      <button type="button" class="btn btn-default btn-close" onClick="$(this).parent('.player').removeClass('visible')">&times;</button>
+      <div id="youtube-widget"></div>
+    </div>
+<ul class="list-group results-container"> 
+  <li class="list-group-item">
+    <ul class="legend list-unstyled">
+      <li>
+        <i class="fa fa-spotify fa-2x"></i> &mdash; loads a spotify playlist with the top 3 songs of each band
+      </li>
+      <li>
+        <i class="fa fa-youtube fa-2x"></i> &mdash; loads youtube videos for that band
+      </li>
+    </ul>
+  </li>
     <%= render partial: 'results', locals: {results: @display_results} %>
   </div>
+
+
+</ul>
 </div>

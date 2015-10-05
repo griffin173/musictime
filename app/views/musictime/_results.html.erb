@@ -1,22 +1,5 @@
-<div class="player">
-    <button type="button" class="btn btn-default btn-close" onClick="$(this).parent('.player').removeClass('visible')">&times;</button>
-    <div id="youtube-widget">
 
-    </div>
-</div>
-<ul class="list-group results-container">	
-  <li class="list-group-item">
-    <ul class="legend list-unstyled">
-      <li>
-        <i class="fa fa-spotify fa-2x"></i> &mdash; loads a spotify playlist with the top 3 songs of each band
-      </li>
-      <li>
-        <i class="fa fa-youtube fa-2x"></i> &mdash; loads youtube videos for that band
-      </li>
-    </ul>
-  </li>
   <% results.each do |result| %>
-  <li class="list-group-item">
     <% if (@start_day != result.start.day) then %>
 	<div class="date <%='seperator' if (@start_day!=0) %>">
       <%= result.start.strftime("%d %b %Y") %>
@@ -24,12 +7,8 @@
 	<% @start_day = result.start.day
 	end %>
 	<%= render partial: 'show', locals: {result: result} %>
-  </li>
   <% end %>
   <% if defined? @metro then %>
-  <li class="list-group-item">
-    <div id="metro-id" data-metro="<%= @metro %>"></div>
-    <div id="page" data-page-number="2"></div>
-  </li>
+    <span id="metro-id" data-metro="<%= @metro %>"></span>
+    <span id="page" data-page-number="2"></span>
   <% end %>
-</ul>

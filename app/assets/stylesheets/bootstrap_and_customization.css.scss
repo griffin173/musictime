@@ -15,7 +15,7 @@ $btn-default-bg: #95a5a6;
     border-radius: 10px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1.0s linear;
+    transition: opacity 0.25s linear;
     &.visible {
         opacity: 1;
         visibility: visible;

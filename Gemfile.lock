@@ -92,6 +92,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-visibility-rails (1.0.8)
     json (1.8.3)
     jwt (1.5.1)
     mail (2.6.3)
@@ -224,6 +225,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-visibility-rails
   masonry-rails
   pg
   rails (= 4.1.8)

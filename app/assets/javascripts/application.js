@@ -50,7 +50,6 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
 
 
 });
-/*
 $(window).on('scroll', function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
           $( ".results-container"  ).fadeTo( "slow" , 0.3)
@@ -72,7 +71,20 @@ $(window).on('scroll', function() {
             });
         }
     });
-*/
+
+
+$( ".gigResult" ).each(function( index ) {
+  var myElement = document.getElementById($(this).attr("id"));
+
+  var elementWatcher = scrollMonitor.create( myElement );
+
+  elementWatcher.enterViewport(function() {
+      console.log( 'I have entered the viewport' );
+  });
+  elementWatcher.exitViewport(function() {
+      console.log( 'I have left the viewport' );
+  });
+});
 bindButtons()
 
 
@@ -105,7 +117,6 @@ function positionElements() {
     $('.player').first().css('left', ($('#map-container').width() - 340)/2);
 }
 
-
 function bindButtons() {
   $( ".spotify-list" ).off( "click", "**" );
   $( ".youtube-search" ).off( "click", "**" );
@@ -135,7 +146,9 @@ function bindButtons() {
           }
         })
           .done(function( data ) {
-            $( "#youtube-widget" ).html(data)
+              var widget = $('#youtube-widget');
+              widget.html(data);
+              widget.parent('.player').addClass('visible');
           });
      
     });
