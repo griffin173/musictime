@@ -27,9 +27,16 @@ var infowindow;
 var markers = new Object();
 $( document ).ready(function() {
 initialize();
+var input = document.getElementById('map-search');
+var searchBox = new google.maps.places.SearchBox(input);
+map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
-$( "#update-button" ).click(function() {
-geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, status) {
+// Bias the SearchBox results towards current map's viewport.
+map.addListener('bounds_changed', function() {
+  searchBox.setBounds(map.getBounds());
+});
+searchBox.addListener('places_changed', function() {
+geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
       $.ajax({
@@ -42,6 +49,7 @@ geocoder.geocode({'address': $( "#address-box" ).val()}, function(results, statu
         .done(function( data ) {
           $( ".results-container" ).html(data)
           bindButtons();
+          addMarkerListeners(data)
         });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -78,24 +86,21 @@ $(window).on('scroll', function() {
 
 addMarkerListeners()
 bindButtons()
+ 
 
-
- map.addListener('dragend', function() {
-    geocoder.geocode({'location': map.getCenter()}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        $( "#address-box" ).val(results[1].formatted_address);
-      } else {
-        window.alert('No results found');
-      }
-    } else {
-      window.alert('Geocoder failed due to: ' + status);
-    }
-  });
-  });
- var input = /** @type {!HTMLInputElement} */(
-      document.getElementById('address-box'));
-  var autocomplete = new google.maps.places.Autocomplete(input);
+ // map.addListener('dragend', function() {
+ //    geocoder.geocode({'location': map.getCenter()}, function(results, status) {
+ //    if (status === google.maps.GeocoderStatus.OK) {
+ //      if (results[1]) {
+ //        $( "#address-box" ).val(results[1].formatted_address);
+ //      } else {
+ //        window.alert('No results found');
+ //      }
+ //    } else {
+ //      window.alert('Geocoder failed due to: ' + status);
+ //    }
+ //  });
+ //  });
 
 window.addEventListener('resize', positionElements);
 positionElements();
