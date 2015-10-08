@@ -67,6 +67,8 @@ $(window).on('scroll', function() {
               pageNumber++
               $('#page').attr('data-page-number', pageNumber)
               $( ".results-container" ).append(data)
+
+              addMarkerListeners(data)
               bindButtons()
               $( ".results-container"  ).fadeTo( "slow" , 1)
             });
@@ -74,32 +76,7 @@ $(window).on('scroll', function() {
     });
 
 
-$( ".gigResult" ).each(function( index ) {
-  var test = $(this).find(".venue");
-  var gigId = ($(this).attr("id"));
-  var myElement = document.getElementById($(this).attr("id"));
-
-  var elementWatcher = scrollMonitor.create( myElement );
-
-  elementWatcher.enterViewport(function() {
-    if (gigId in markers) {
-        markers[gigId].setMap(map)
-    } else {
-      var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
-      var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: 'Hello World!'
-      });
-
-      markers[gigId] = marker;
-    }
-  });
-  elementWatcher.exitViewport(function() {
-    if (gigId in markers) 
-      markers[gigId].setMap(null)
-  });
-});
+addMarkerListeners()
 bindButtons()
 
 
@@ -124,7 +101,39 @@ window.addEventListener('resize', positionElements);
 positionElements();
 
 });
+function addMarkerListeners(html) {
+  if (typeof(html) != "undefined" && html !== null) {
+    gigs = $(html).filter(".gigResult")
+  } else {
+    gigs = $( ".gigResult" )
+  }
+  gigs.each(function( index ) {
+    var test = $(this).find(".venue");
+    var gigId = ($(this).attr("id"));
+    var myElement = document.getElementById($(this).attr("id"));
 
+    var elementWatcher = scrollMonitor.create( myElement );
+
+    elementWatcher.enterViewport(function() {
+      if (gigId in markers) {
+          markers[gigId].setMap(map)
+      } else {
+        var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+
+        markers[gigId] = marker;
+      }
+    });
+    elementWatcher.exitViewport(function() {
+      if (gigId in markers) 
+        markers[gigId].setMap(null)
+    });
+  });
+}
 function positionElements() {
     $('#map-container').css('height', window.innerHeight);
     // center the player inside the map
