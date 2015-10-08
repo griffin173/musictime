@@ -24,6 +24,7 @@ var browserSupportFlag =  new Boolean();
 var map;
 var geocoder;
 var infowindow;
+var markers = new Object();
 $( document ).ready(function() {
 initialize();
 
@@ -74,15 +75,29 @@ $(window).on('scroll', function() {
 
 
 $( ".gigResult" ).each(function( index ) {
+  var test = $(this).find(".venue");
+  var gigId = ($(this).attr("id"));
   var myElement = document.getElementById($(this).attr("id"));
 
   var elementWatcher = scrollMonitor.create( myElement );
 
   elementWatcher.enterViewport(function() {
-      console.log( 'I have entered the viewport' );
+    if (gigId in markers) {
+        markers[gigId].setMap(map)
+    } else {
+      var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+
+      markers[gigId] = marker;
+    }
   });
   elementWatcher.exitViewport(function() {
-      console.log( 'I have left the viewport' );
+    if (gigId in markers) 
+      markers[gigId].setMap(null)
   });
 });
 bindButtons()

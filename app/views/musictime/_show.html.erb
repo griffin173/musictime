@@ -11,10 +11,9 @@
             %>
             <div class="row">
               <div class="col-md-10" >
-
                 <div class="headliners"><%= headliners.to_sentence %></div> 
                 <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
-                <%= result.venue.display_name() +', '+result.location.city %> <br>
+                <div class="venue" data-lat="<%= result.venue.lat %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>"><%= result.venue.display_name() +', '+result.location.city %> </div>
                 <%= result.start.strftime("%d %b %Y") %> <br>
               </div>
               <div class="col-md-2" >
