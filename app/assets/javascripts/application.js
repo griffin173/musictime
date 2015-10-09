@@ -125,10 +125,17 @@ function addMarkerListeners(html) {
       if (gigId in markers) {
           markers[gigId].setMap(map)
       } else {
+        var image = {
+          url: "http://www.google.com/mapfiles/kml/paddle/1.png",
+          size: null,
+          origin: null,
+          anchor: null,
+          scaledSize: new google.maps.Size(50, 50)
+        };
         var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
         var marker = new google.maps.Marker({
           position: myLatLng,
-          icon: "http://www.google.com/mapfiles/kml/paddle/1.png",
+          icon: image,
           map: map
         });
         markers[gigId] = marker;
