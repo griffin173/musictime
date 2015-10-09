@@ -116,6 +116,7 @@ function addMarkerListeners(html) {
   }
   gigs.each(function( index ) {
     var test = $(this).find(".venue");
+    var markerIndex = test.attr("data-marker-index");
     var gigId = ($(this).attr("id"));
     var myElement = document.getElementById($(this).attr("id"));
 
@@ -126,7 +127,7 @@ function addMarkerListeners(html) {
           markers[gigId].setMap(map)
       } else {
         var image = {
-          url: "http://www.google.com/mapfiles/kml/paddle/1.png",
+          url: "http://www.google.com/mapfiles/kml/paddle/"+markerIndex+".png",
           size: null,
           origin: null,
           anchor: null,
@@ -187,6 +188,18 @@ function bindButtons() {
               widget.html(data);
               widget.parent('.player').addClass('visible');
           });
+     
+    });
+    $( ".map-marker" ).click(function() {
+    event.stopPropagation()
+    event.preventDefault()
+    marker = markers[$(this).attr("data-songkick-id")]
+    map.setCenter(marker.getPosition());
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+
+    setTimeout(function() {
+        marker.setAnimation(null)
+    }, 2220);
      
     });
 }

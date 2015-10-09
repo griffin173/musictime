@@ -14,13 +14,13 @@
               <div class="col-md-10" >
                 <div class="headliners"><%= headliners.to_sentence %></div> 
                 <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
-                <div class="venue" data-lat="<%= result.venue.lat %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>"><%= result.venue.display_name() +', '+result.location.city %> </div>
+                <div class="venue" data-lat="<%= result.venue.lat %>" data-marker-index="<%= index %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>"><%= result.venue.display_name() +', '+result.location.city %> </div>
                 <%= result.start.strftime("%d %b %Y") %> <br>
               </div>
               <div class="col-md-1" >
 
-                <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list pull-right">
-                  <img src="http://www.google.com/mapfiles/kml/paddle/1.png" height="42px" weight="36px"></img>
+                <a href='#' data-songkick-id="<%= result.id %>" class="map-marker" pull-right">
+                  <img src="http://www.google.com/mapfiles/kml/paddle/<%= index %>.png" height="42px" weight="36px"></img>
                 </a>
               </div>
               <div class="col-md-1" >
