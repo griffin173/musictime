@@ -127,7 +127,7 @@ function addMarkerListeners(html) {
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: 'Hello World!'
+          title: test.attr("data-venue-name")
         });
 
         markers[gigId] = marker;
