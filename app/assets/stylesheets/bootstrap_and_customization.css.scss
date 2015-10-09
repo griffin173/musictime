@@ -74,6 +74,19 @@ $btn-default-bg: #95a5a6;
     }
 }
 
+.header {
+    .row {
+        margin-top: 10px;
+    }
+    .btn {
+        i {
+            position: absolute;
+            left: 30px;
+            top: 15px;
+        }
+    }
+}
+
 
 .affix {
   top: 10px;
@@ -106,11 +119,26 @@ $btn-default-bg: #95a5a6;
 .fa-youtube {
   color:#cd201f;
 }
+.legend {
+    i.fa {
+        position: relative;
+        display: inline-block;
+        top: 4px;
+    }
+}
 .supporting-acts {
   font-size: 17px;
 }
 .headliners {
   font-size: 27px;
+}
+
+.img-logo {
+    display: block;
+    width: 95%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #controls {
