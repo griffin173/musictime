@@ -25,6 +25,8 @@ var map;
 var geocoder;
 var infowindow;
 var markers = new Object();
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = 0;
 $( document ).ready(function() {
 initialize();
 var input = document.getElementById('map-search');
@@ -126,10 +128,9 @@ function addMarkerListeners(html) {
         var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
         var marker = new google.maps.Marker({
           position: myLatLng,
-          map: map,
-          title: test.attr("data-venue-name")
+          icon: "http://www.google.com/mapfiles/kml/paddle/1.png",
+          map: map
         });
-
         markers[gigId] = marker;
       }
     });
