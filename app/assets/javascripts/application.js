@@ -133,13 +133,32 @@ function addMarkerListeners(html) {
           anchor: null,
           scaledSize: new google.maps.Size(50, 50)
         };
-        var myLatLng = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))};
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          icon: image,
-          map: map
-        });
-        markers[gigId] = marker;
+
+        var address;
+        if (test.attr("data-lat")) {
+          address = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))}
+          var marker = new google.maps.Marker({
+            position: address,
+            icon: image,
+            map: map
+          });
+          markers[gigId] = marker;
+        } else {
+          geocoder.geocode({'address': test.text()}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              address = {lat: Number(results[0].geometry.location.lat()), lng: Number(results[0].geometry.location.lng())}
+              var marker = new google.maps.Marker({
+                position: address,
+                icon: image,
+                map: map
+              });
+              markers[gigId] = marker;
+            } else {
+            }
+          });
+        }
+        
+        
       }
     });
     elementWatcher.exitViewport(function() {
