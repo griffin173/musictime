@@ -3,7 +3,7 @@
    results.each do |result| %>
     <% if (@start_day != result.start.day) then %>
 	<div class="date <%='seperator' if (@start_day!=0) %>">
-      <%= result.start.strftime("%d %b %Y") %>
+      <%= result.start.strftime("%A, %B #{result.start.day.ordinalize}") %>
 	</div>
 	<% @start_day = result.start.day
 	end %>
