@@ -50,7 +50,7 @@ geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status
         }
       })
         .done(function( data ) {
-          $( ".results-container" ).html(data)
+          $( "#results-container" ).html(data)
           bindButtons();
           addMarkerListeners(data)
         });
@@ -64,7 +64,7 @@ geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status
 });
 $(window).on('scroll', function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
-          $( ".results-container"  ).fadeTo( "slow" , 0.3)
+          $( "#results-container"  ).fadeTo( "slow" , 0.3)
           $.ajax({
             url: "/loadmore",
             data: {
@@ -77,11 +77,11 @@ $(window).on('scroll', function() {
               var pageNumber = $('#page').attr('data-page-number')
               pageNumber++
               $('#page').attr('data-page-number', pageNumber)
-              $( ".results-container" ).append(data)
+              $( "#results-container" ).append(data)
 
               addMarkerListeners(data)
               bindButtons()
-              $( ".results-container"  ).fadeTo( "slow" , 1)
+              $( "#results-container"  ).fadeTo( "slow" , 1)
             });
         }
     });

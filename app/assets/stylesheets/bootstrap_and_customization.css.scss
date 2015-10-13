@@ -1,6 +1,9 @@
 $jumbotron-padding: 11px;
 $btn-default-bg: #95a5a6;
 $well-bg: #F9F9F9;
+
+$highlight_color_dark: #35a8d6;
+$highlight_color_light: #3bb9ea;
 @import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -143,7 +146,7 @@ $well-bg: #F9F9F9;
     padding-top: 10px;
 }
 .seperator {
-  border-top: 5px solid black;
+  border-top: 5px solid $highlight_color_dark;
   border-bottom: 0px solid black;
 }
 .date {

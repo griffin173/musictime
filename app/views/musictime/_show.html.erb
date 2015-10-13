@@ -11,26 +11,18 @@
                  end
                end
             %>
-            <div class="row">
-              <div class="col-md-10" >
                 <div class="headliners"><%= headliners.to_sentence %></div> 
                 <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
                 <div class="venue" data-lat="<%= result.venue.lat %>" data-marker-index="<%= index %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>"><%= result.venue.display_name() +', '+result.location.city %> </div>
                 <%= result.start.strftime("%d %b %Y") %> <br>
-              </div>
-              <div class="col-md-1" >
-
-                <a href='#' data-songkick-id="<%= result.id %>" class="map-marker pull-right">
-                  <img src="http://www.google.com/mapfiles/kml/paddle/<%= index %>.png" height="42px" weight="36px"></img>
-                </a>
-              </div>
-              <div class="col-md-1" >
-                <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list pull-right">
-                  <i class="fa fa-spotify fa-3x"></i>
-                </a>
-              </div>
-            </div>
-            
+        <div>
+          <a href='#' data-songkick-id="<%= result.id %>" class="map-marker">
+            <img src="http://www.google.com/mapfiles/kml/paddle/<%= index %>.png" height="42px" weight="36px"></img>
+          </a>
+          <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list">
+            <i class="fa fa-spotify fa-3x"></i>
+          </a>
+        </div> 
             
         <div class="panel panel-default artists">
             <div class="panel-heading show-artists" role="tab" id="headingOne" data-toggle="collapse" href="#collapse<%= result.id %>" aria-expanded="true" aria-controls="collapseOne">
