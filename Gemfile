@@ -21,7 +21,7 @@ gem 'gmaps4rails'
 gem 'font-awesome-sass'
 gem 'rspotify'
 gem 'underscore-rails'
-gem 'geokit-rails', github: 'geokit/geokit-rails'
+#gem 'geokit-rails', github: 'geokit/geokit-rails'
 
 group :development, :test do
      gem 'sqlite3'
