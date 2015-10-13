@@ -1,7 +1,6 @@
 class MusictimeController < ApplicationController
   before_filter :set_api
   require 'api_manager'
-  geocode_ip_address
 
   def set_api
     @api_manager = ApiManager.new '01Q2xyzpKWuaMeI6'
@@ -12,10 +11,6 @@ class MusictimeController < ApplicationController
     @display_results = results[:results]
     @metro = results[:metro_id]
     @start_day = 0
-  	if geo = session[:geo_location]
-      @ipaddress = geo;
-
-    end
   end
 
   def get_results
