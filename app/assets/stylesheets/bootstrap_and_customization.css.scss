@@ -79,16 +79,54 @@ $well-bg: #F9F9F9;
 }
 
 .header {
-    .row {
-        margin-top: 10px;
+  color: #fff;
+  background-image: url('/assets/header-background.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+  margin-left: -18px;
+  margin-right: -15px;
+  margin-top: 0;
+  padding: 20px 15px;
+  .row {
+    margin-top: 10px;
+  }
+  .btn {
+    background: transparent;
+    border: 1px solid #fff;
+    font-weight: bold;
+    height: 50%;
+    i {
+      position: relative;
+      left: -10px;
+      background: transparent;
     }
-    .btn {
-        i {
-            position: absolute;
-            left: 30px;
-            top: 15px;
-        }
-    }
+  }
+  .img-logo {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 8px;
+    border-radius: 4px;
+    background: rgba(255.0,255.0,255.0,0.6);
+  }
+  i {
+      background: rgba(255.0,255.0,255.0,0.6);
+      padding: 2px;
+      border-radius: 4px;
+  }
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0.0,0.0,0.0,0.35);
+  }
 }
 
 
@@ -137,13 +175,6 @@ $well-bg: #F9F9F9;
   font-size: 25px;
 }
 
-.img-logo {
-    display: block;
-    width: 95%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 #controls {
     padding-bottom: 10px;
