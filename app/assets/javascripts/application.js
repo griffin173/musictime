@@ -24,6 +24,7 @@ var browserSupportFlag =  new Boolean();
 var map;
 var geocoder;
 var infowindow;
+var placesApi;
 var markers = new Object();
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var labelIndex = 0;
@@ -86,7 +87,6 @@ $(window).on('scroll', function() {
     });
 
 
-addMarkerListeners()
 bindButtons()
  
 
@@ -134,8 +134,9 @@ function addMarkerListeners(html) {
           scaledSize: new google.maps.Size(50, 50)
         };
 
-        var address;
         if (test.attr("data-lat")) {
+
+          var address;
           address = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))}
           var marker = new google.maps.Marker({
             position: address,
@@ -144,8 +145,12 @@ function addMarkerListeners(html) {
           });
           markers[gigId] = marker;
         } else {
-          geocoder.geocode({'address': test.text()}, function(results, status) {
-            if (status === google.maps.GeocoderStatus.OK) {
+
+          var address;
+
+  
+          placesApi.nearbySearch({location: map.getCenter(), name: test.attr("data-venue-name"), radius: 25000}, function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
               address = {lat: Number(results[0].geometry.location.lat()), lng: Number(results[0].geometry.location.lng())}
               var marker = new google.maps.Marker({
                 position: address,
@@ -157,7 +162,7 @@ function addMarkerListeners(html) {
             }
           });
         }
-        
+
         
       }
     });
@@ -231,6 +236,7 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
 
+  placesApi = new google.maps.places.PlacesService(map);
   geocoder = new google.maps.Geocoder;
   infowindow = new google.maps.InfoWindow;
   // Try W3C Geolocation (Preferred)
@@ -239,6 +245,8 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
+
+      addMarkerListeners()
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });

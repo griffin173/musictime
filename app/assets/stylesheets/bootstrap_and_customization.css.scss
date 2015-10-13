@@ -1,5 +1,6 @@
 $jumbotron-padding: 11px;
 $btn-default-bg: #95a5a6;
+$well-bg: #F9F9F9;
 @import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -60,7 +61,10 @@ $btn-default-bg: #95a5a6;
     opacity: 1;
   top: 0;
 }
-
+.gigResult {
+  margin: 5px;
+  min-height: 237px
+}
 .legend {
     margin-bottom: 10px;
     li {
@@ -127,10 +131,10 @@ $btn-default-bg: #95a5a6;
     }
 }
 .supporting-acts {
-  font-size: 17px;
+  font-size: 15px;
 }
 .headliners {
-  font-size: 27px;
+  font-size: 25px;
 }
 
 .img-logo {
