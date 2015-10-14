@@ -226,6 +226,7 @@ function bindButtons() {
 
 function initialize() {
   var draggable = false;
+  alert($(window).width());
   if ($(window).width()>768)
     draggable=true;
   var myOptions = {
