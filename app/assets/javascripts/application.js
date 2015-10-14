@@ -37,6 +37,9 @@ map.addListener('bounds_changed', function() {
   searchBox.setBounds(map.getBounds());
 });
 searchBox.addListener('places_changed', function() {
+
+  $( "#results-container"  ).fadeTo( "slow" , 0.3)
+  $( "#results-container" ).html('');
   geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
@@ -51,6 +54,7 @@ searchBox.addListener('places_changed', function() {
           $( "#results-container" ).html(data)
           bindButtons();
           addMarkerListeners(data)
+          $( "#results-container"  ).fadeTo( "slow" , 1)
         });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -221,9 +225,13 @@ function bindButtons() {
 
 
 function initialize() {
+  var draggable = false;
+  if ($(window).width()>768)
+    draggable=true;
   var myOptions = {
     zoom: 11,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggable: draggable
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
 
