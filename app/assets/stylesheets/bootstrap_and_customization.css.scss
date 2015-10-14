@@ -66,7 +66,9 @@ $highlight_color_light: #3bb9ea;
 }
 .gigResult {
   margin: 5px;
-  min-height: 237px
+  min-height: 237px;
+  border: 1px solid #a1a1a1;
+  border-radius: 10px;
 }
 .legend {
     margin-bottom: 10px;
@@ -103,6 +105,15 @@ $highlight_color_light: #3bb9ea;
       position: relative;
       left: -10px;
       background: transparent;
+    }
+    &:hover {
+        border-color: $highlight_color_light;
+        color: $highlight_color_light;
+    }
+    &:active,&:visited,&:focus {
+        border-color: $highlight_color_dark;
+        color: $highlight_color_dark;
+        box-shadow: none;
     }
   }
   .img-logo {
@@ -142,17 +153,57 @@ $highlight_color_light: #3bb9ea;
     background-color: white;
     opacity: 1
 }
-.results-container {
-    padding-top: 10px;
-}
-.seperator {
-  border-top: 5px solid $highlight_color_dark;
-  border-bottom: 0px solid black;
+.gigResult {
+    a {
+        color: $highlight_color_light;
+        text-decoration: none;
+        &:hover,&:visited,&:active {
+            color: $highlight_color_dark;
+            text-decoration: underline;
+        }
+    }
+    .highlight {
+        color: $highlight_color_light;
+    }
+    .supporting-names {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .start-time {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .venue-name {
+        font-size: 16px;
+    }
+    .expand {
+        margin-right: 10px;
+        font-size: 30px;
+        color: #a1a1a1;
+        margin-top: -9px;
+    }
+    .btn-actions {
+        a {
+            margin-left: 10px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
 }
 .date {
   text-align: center;
-  font-size: 30px;
-  padding-bottom: 10px;
+  font-size: 26px;
+  padding-bottom: 5px;
+  border-width: 0 1px 1px 1px;
+  border-color: $highlight_color_light;
+  border-style: solid;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .show-artists {
   text-align: center;

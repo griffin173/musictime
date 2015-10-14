@@ -1,4 +1,4 @@
-<div class=" col-sm-12 col-md-6">
+<div class=" col-md-12 col-lg-6">
   <div class="well gigResult container-fluid" id="<%= result.id %>">
   
             <% headliners=[];
@@ -11,26 +11,20 @@
                  end
                end
             %>
-                <div class="headliners"><%= headliners.to_sentence %></div> 
-                <div class="supporting-acts"> <%= supportingActs.to_sentence %> </div>
-                <div class="venue" data-lat="<%= result.venue.lat %>" data-marker-index="<%= index %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>"><%= result.venue.display_name() +', '+result.location.city %> </div>
-                <%= result.start.strftime("%d %b %Y") %> <br>
-        <div>
-          <a href='#' data-songkick-id="<%= result.id %>" class="map-marker">
-            <img src="http://www.google.com/mapfiles/kml/paddle/<%= index %>.png" height="42px" weight="36px"></img>
-          </a>
-          <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list">
-            <i class="fa fa-spotify fa-3x"></i>
-          </a>
-        </div> 
+                <div class="headliners"><a href="<%= result.uri %>" target="_blank"><%= headliners.to_sentence %></a></div> 
+                <% if supportingActs.any? %><div class="supporting-acts">with <span class="supporting-names"><%= supportingActs.to_sentence %></span></div><% end %>
+                <div class="venue" data-lat="<%= result.venue.lat %>" data-marker-index="<%= index %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>">
+                    <span class="highlight">Venue:</span> <span class="venue-name"><%= result.venue.display_name() %></span>
+                    <a href="<%= result.venue.uri %>" target="_blank"><i class="fa fa-external-link"></i></a>
+                </div>
+                <div class="start-time">
+                    <i class="fa fa-clock-o"></i> <%= result.start.strftime("%l:%M %p") %>
+                </div>
             
         <div class="panel panel-default artists">
             <div class="panel-heading show-artists" role="tab" id="headingOne" data-toggle="collapse" href="#collapse<%= result.id %>" aria-expanded="true" aria-controls="collapseOne">
               <h4 class="panel-title">
-                
-                  Show All Artists
-
-              
+                  All Artists<span class="pull-right expand">&plus;</span>
               </h4>
 
             </div>
@@ -51,5 +45,9 @@
               </div>
             </div>
           </div>
+        <div class="pull-right btn-actions">
+          <a href='#' data-songkick-id="<%= result.id %>" class="map-marker" data-toggle="tooltip" title="Show on map"><i class="fa fa-compass fa-2x"></i></a>
+          <a href='#' data-songkick-id="<%= result.id %>" class="spotify-list" data-toggle="tooltip" title="Spotify playlist"><i class="fa fa-spotify fa-2x"></i></a>
+        </div> 
   </div>              
 </div>
