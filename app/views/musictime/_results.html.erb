@@ -1,16 +1,12 @@
-<% index = 1;
-   results.each do |result| %>
+<% results.each do |result| %>
     <% if (@start_day != result.start.day) then %>
-	<div class=" col-sm-12 col-md-12 date <%='seperator' if (@start_day!=0) %>">
+	<div class="col-xs-12 col-sm-12 col-md-12 date <%='seperator' if (@start_day!=0) %>">
       <%= result.start.strftime("%A, %B #{result.start.day.ordinalize}") %>
 	</div>
 	<% @start_day = result.start.day
 	end %>
-	<%= render partial: 'show', locals: {index: index, result: result} %>
-  <% index = index+1
-    index = 1 if (index>9)
-    end 
-  %>
+	<%= render partial: 'show', locals: {result: result} %>
+  <% end %>
   <% if defined? @metro then %>
     <span id="metro-id" data-metro="<%= @metro %>"></span>
     <span id="page" data-page-number="2"></span>

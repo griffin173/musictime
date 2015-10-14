@@ -1,4 +1,4 @@
-<div class=" col-md-12 col-lg-6">
+<div class=" col-xs-12 col-md-12 col-lg-6">
   <div class="well gigResult container-fluid" id="<%= result.id %>">
   
             <% headliners=[];
@@ -13,7 +13,7 @@
             %>
                 <div class="headliners"><a href="<%= result.uri %>" target="_blank"><%= headliners.to_sentence %></a></div> 
                 <% if supportingActs.any? %><div class="supporting-acts">with <span class="supporting-names"><%= supportingActs.to_sentence %></span></div><% end %>
-                <div class="venue" data-lat="<%= result.venue.lat %>" data-marker-index="<%= index %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>">
+                <div class="venue" data-lat="<%= result.venue.lat %>" data-lng="<%= result.venue.lng %>" data-venue-name="<%= result.venue.display_name %>">
                     <span class="highlight">Venue:</span> <span class="venue-name"><%= result.venue.display_name() %></span>
                     <a href="<%= result.venue.uri %>" target="_blank"><i class="fa fa-external-link"></i></a>
                 </div>

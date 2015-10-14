@@ -26,8 +26,6 @@ var geocoder;
 var infowindow;
 var placesApi;
 var markers = new Object();
-var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var labelIndex = 0;
 $( document ).ready(function() {
 initialize();
 var input = document.getElementById('map-search');
@@ -39,7 +37,7 @@ map.addListener('bounds_changed', function() {
   searchBox.setBounds(map.getBounds());
 });
 searchBox.addListener('places_changed', function() {
-geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status) {
+  geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
       $.ajax({
@@ -110,13 +108,14 @@ positionElements();
 });
 function addMarkerListeners(html) {
   if (typeof(html) != "undefined" && html !== null) {
-    gigs = $(html).filter(".gigResult")
+    html = $.parseHTML( html )
+    gigs = $(html).find(".gigResult")
+
   } else {
     gigs = $( ".gigResult" )
   }
   gigs.each(function( index ) {
     var test = $(this).find(".venue");
-    var markerIndex = test.attr("data-marker-index");
     var gigId = ($(this).attr("id"));
     var myElement = document.getElementById($(this).attr("id"));
 
@@ -126,13 +125,6 @@ function addMarkerListeners(html) {
       if (gigId in markers) {
           markers[gigId].setMap(map)
       } else {
-        var image = {
-          url: "http://www.google.com/mapfiles/kml/paddle/"+markerIndex+".png",
-          size: null,
-          origin: null,
-          anchor: null,
-          scaledSize: new google.maps.Size(50, 50)
-        };
 
         if (test.attr("data-lat")) {
 
@@ -140,7 +132,6 @@ function addMarkerListeners(html) {
           address = {lat: Number(test.attr("data-lat")), lng: Number(test.attr("data-lng"))}
           var marker = new google.maps.Marker({
             position: address,
-            icon: image,
             map: map
           });
           markers[gigId] = marker;
@@ -154,7 +145,6 @@ function addMarkerListeners(html) {
               address = {lat: Number(results[0].geometry.location.lat()), lng: Number(results[0].geometry.location.lng())}
               var marker = new google.maps.Marker({
                 position: address,
-                icon: image,
                 map: map
               });
               markers[gigId] = marker;
@@ -246,8 +236,21 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
+      $( "#results-container"  ).fadeTo( "slow" , 0.3)
+      $.ajax({
+        url: "/ajax",
+        data: {
+          lat: map.getCenter().lat(),
+          lng: map.getCenter().lng()
+        }
+      })
+        .done(function( data ) {
+          $( "#results-container" ).html(data)
+          bindButtons();
+          addMarkerListeners(data)
 
-      addMarkerListeners()
+          $( "#results-container"  ).fadeTo( "slow" , 1)
+        });
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });

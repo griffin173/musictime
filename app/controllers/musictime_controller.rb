@@ -7,9 +7,9 @@ class MusictimeController < ApplicationController
   end
 
   def home 
-    results = @api_manager.get_location_results('Ottawa, Canada')
-    @display_results = results[:results]
-    @metro = results[:metro_id]
+    results = []
+    @display_results = []
+    @metro = []
     @start_day = 0
   end
 
