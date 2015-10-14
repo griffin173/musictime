@@ -225,9 +225,9 @@ function bindButtons() {
 
 
 function initialize() {
-  var draggable = false;
-  if ($(window).width()>768)
-    draggable=true;
+  var draggable = true;
+  if (Modernizr.touchevents) 
+    draggable=false;
   var myOptions = {
     zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
