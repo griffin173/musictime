@@ -180,6 +180,7 @@ function positionElements() {
 }
 
 function bindButtons() {
+  $('[data-toggle="tooltip"]').tooltip();
   $( ".spotify-list" ).off( "click", "**" );
   $( ".youtube-search" ).off( "click", "**" );
   	$( ".spotify-list" ).click(function() {
