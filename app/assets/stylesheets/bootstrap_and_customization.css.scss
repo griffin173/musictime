@@ -4,6 +4,7 @@ $well-bg: #F9F9F9;
 
 $highlight_color_dark: #35a8d6;
 $highlight_color_light: #3bb9ea;
+$card_min_height: 300px;
 @import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -54,11 +55,6 @@ $highlight_color_light: #3bb9ea;
 }
 .bottom-show {
     
-}
-.gigResult {
-  min-height: 240px;
-  border: 1px solid #a1a1a1;
-  border-radius: 10px;
 }
 
 .header {
@@ -122,6 +118,9 @@ $highlight_color_light: #3bb9ea;
 }
 
 .gigResult {
+    min-height: $card_min_height;
+    border: 1px solid #a1a1a1;
+    border-radius: 10px;
     a {
         color: $highlight_color_light;
         text-decoration: none;
@@ -151,6 +150,9 @@ $highlight_color_light: #3bb9ea;
         margin-top: -9px;
     }
     .btn-actions {
+        position: absolute;
+        bottom: 25px;
+        right: 30px;
         a {
             margin-left: 10px;
             &:first-child {
