@@ -113,6 +113,15 @@ $card_min_height: 300px;
     background: rgba(0.0,0.0,0.0,0.35);
   }
 }
+.img-songkick-logo {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 8px;
+  }
 .gigResult {
     min-height: $card_min_height;
     border: 1px solid #a1a1a1;
@@ -126,6 +135,9 @@ $card_min_height: 300px;
         }
     }
     
+    &.gig-selected {
+      border: 4px solid $highlight_color_dark;
+    }
     .highlight {
         color: $highlight_color_light;
     }
@@ -159,9 +171,6 @@ $card_min_height: 300px;
     }
 }
 
-.gig-selected {
-    border: 30px solid $highlight_color_dark;
-}
 .date {
   text-align: center;
   font-size: 26px;
