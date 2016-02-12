@@ -18,7 +18,7 @@
 //= require_tree .
 var initialLocation;
 var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);//if people don't share location put them in new york
-
+var mobile = Modernizr.touchevents;
 var map;
 var geocoder;
 var placesApi;
@@ -26,31 +26,52 @@ var selectedGig;
 var markers = new Object(); // array of map markers to bounce/center on when user clicks icon in result list.
 $( document ).ready(function() {
 selectedGig=0;
-initialize();
+if (mobile) {
+  $( "#map-search" ).addClass('mobile');
 
+  $( ".searchbar" ).addClass('mobile');
+  initializeMobile();
+} else {
+  initialize();
+}
 //put the search bar on the map
 var input = document.getElementById('map-search');
 var searchBox = new google.maps.places.SearchBox(input);
-map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+if (!(mobile)) {
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+}
 
 // Bias the SearchBox results towards current map's viewport.
-map.addListener('bounds_changed', function() {
-  searchBox.setBounds(map.getBounds());
-});
+
 //when the search box has it's value changed, update the listings
 searchBox.addListener('places_changed', function() {
 
   geocoder.geocode({'address': $( "#map-search" ).val()}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
+      if (mobile) {
+        data = {
+          lat: results[0].geometry.location.lat(),
+          lng: results[0].geometry.location.lng()
+        }
+        getListings(data);
+      } else {
 
-      map.setCenter(results[0].geometry.location);
-      getListings()
+        map.setCenter(results[0].geometry.location);
+        getListings()
+      }
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 });
-
+$('.searchbar').affix({
+  offset: {
+    top: 0
+  }
+})
 //implement infinite scroll, load more when you scroll to bottom
 $(window).on('scroll', function() {
   if($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -58,7 +79,7 @@ $(window).on('scroll', function() {
   }
 });
 
-bindButtons()
+//bindButtons()
  
 
 //position the music player
@@ -85,28 +106,34 @@ function loadmore() {
       $('#page').attr('data-page-number', pageNumber)
       $( "#results-container" ).append(data)
 
-      addMarkerListeners(data)
+      if (!mobile) {
+        addMarkerListeners(data)
+      }
       bindButtons()
       $( "#results-container"  ).fadeTo( "slow" , 1)
     });
 }
 
 //load in initial list of results
-function getListings() {
-
+function getListings(data) {
+  if (typeof data === 'undefined') {
+      data = {
+        lat: map.getCenter().lat(),
+        lng: map.getCenter().lng()
+      }
+  }
   $( "#results-container"  ).fadeTo( "slow" , 0.3)
   $( "#results-container" ).html('');
   $.ajax({
     url: "/ajax",
-    data: {
-      lat: map.getCenter().lat(),
-      lng: map.getCenter().lng()
-    }
+    data: data
   })
     .done(function( data ) {
       $( "#results-container" ).html(data)
       bindButtons();
-      addMarkerListeners(data)
+      if (!mobile) {
+        addMarkerListeners(data)
+      }
       $( "#results-container"  ).fadeTo( "slow" , 1)
     });
 }
@@ -246,7 +273,7 @@ function bindButtons() {
 function initialize() {
   var draggable = true;
   //disable map drag on touch devices or you can get stuck on the map by zooming in
-  if (Modernizr.touchevents) 
+  if (mobile) 
     draggable=false;
   var myOptions = {
     zoom: 11,
@@ -277,5 +304,44 @@ function initialize() {
     initialLocation = newyork;
     map.setCenter(initialLocation);
     getListings();
+  }
+}
+
+//initialize the google maps and location and load initial results
+function initializeMobile() {
+  var draggable = true;
+  //disable map drag on touch devices or you can get stuck on the map by zooming in
+  if (mobile) 
+    draggable=false;
+  var myOptions = {
+    zoom: 11,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    draggable: draggable
+  };
+
+  placesApi = new google.maps.places.PlacesService(document.createElement('div'));
+  geocoder = new google.maps.Geocoder;
+  // Try W3C Geolocation (Preferred)
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      data = {
+        lat: initialLocation.lat(),
+        lng: initialLocation.lng()
+      }
+      getListings(data);
+    }, function() {
+      handleNoGeolocation();
+    });
+
+  }
+  // Browser doesn't support Geolocation
+  else {
+    handleNoGeolocation();
+  }
+  //if we don't know where they are put them in new york
+  function handleNoGeolocation() {
+    initialLocation = newyork;
+    getListings(initialLocation);
   }
 }
