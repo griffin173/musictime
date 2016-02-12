@@ -16,6 +16,7 @@ class MusictimeController < ApplicationController
   def get_results
   	location_lat = params[:lat]
   	location_lng = params[:lng]
+    @mobile = params[:mobile]
 
   	
     results = @api_manager.get_location_geo_results(location_lat,location_lng)
