@@ -15,19 +15,6 @@ $card_min_height: 300px;
   font-weight: 300;
   text-overflow: ellipsis;
   width: 50%;
-  &.mobile {
-    width: 100%;
-  }
-}
-.searchbar {
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 300;
-  text-overflow: ellipsis;
-  &.affix {
-    z-index: 100;
-  }
-  width: 100%;
 }
 .player {
     position: fixed;
