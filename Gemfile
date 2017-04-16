@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 gem 'rails', '4.1.8'
@@ -14,6 +14,7 @@ gem 'gmaps4rails'
 gem 'font-awesome-sass'
 gem 'rspotify'
 gem 'underscore-rails'
+gem "browser"
 #gem 'geokit-rails', github: 'geokit/geokit-rails'
 
 group :development, :test do

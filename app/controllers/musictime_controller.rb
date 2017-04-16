@@ -7,6 +7,9 @@ class MusictimeController < ApplicationController
   end
 
   def home 
+    if browser.device.mobile? then 
+      redirect_to "http://m.musictime.info"
+    end
     results = []
     @display_results = []
     @metro = []
