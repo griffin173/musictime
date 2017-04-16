@@ -122,12 +122,11 @@ function getListings(data) {
         lng: map.getCenter().lng()
       }
   }
-  data.mobile=mobile;
   $( "#results-container"  ).fadeTo( "slow" , 0.3)
   $( "#results-container" ).html('');
   $.ajax({
     url: "/ajax",
-    data: data,
+    data: data
   })
     .done(function( data ) {
       $( "#results-container" ).html(data)
